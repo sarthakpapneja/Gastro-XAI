@@ -5,7 +5,7 @@ pandas
 matplotlib
 scikit-learn
 captum
-opencv-python
+opencv-python-headless
 pillow
 requests
 tqdm
