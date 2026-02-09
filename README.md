@@ -7,6 +7,9 @@
 
 GastroAI is a production-grade Explainable AI (XAI) suite designed to assist medical professionals in classifying gastrointestinal pathologies from endoscopy images. Built on the **Kvasir v2** dataset, it combines high-accuracy deep learning with multi-modal explanations to bridge the gap between AI and clinical trust.
 
+**🔗 [Live Demo on Render](https://gastro-xai.onrender.com)**  
+*(Note: Initial load may take ~50s on free instances due to cold starts)*
+
 ---
 
 ## 🔬 Core Features
