@@ -5,8 +5,11 @@ __pycache__/
 venv/
 .env
 
-# Data (Large Files)
-data/
+# Data and Models (Large Files)
+data/kvasir-dataset-v2/
+data/*.tar.gz
+data/*.zip
+models/*.pth
 reports/*.png
 reports/*.html
 
