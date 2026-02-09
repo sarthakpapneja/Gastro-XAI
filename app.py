@@ -9,6 +9,11 @@ import sys
 import plotly.express as px
 import pandas as pd
 import time
+import gc
+
+# Memory Optimization for Cloud (Render Free Tier)
+torch.set_num_threads(1)
+gc.enable()
 
 # Add project root to path
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
@@ -68,21 +73,21 @@ with st.sidebar:
     st.success("System: **Online**") 
     st.info(f"Model: ResNet50\nClasses: {len(CLASSES)}")
 
-# Load Model
-@st.cache_resource
+# Load Model (Strict Lazy Loading)
 def load_model():
-    model = GastroClassifier(num_classes=len(CLASSES))
-    try:
-        model.load_state_dict(torch.load(MODEL_PATH, map_location=torch.device('cpu')))
-    except FileNotFoundError:
-        st.error(f"Model file not found at {MODEL_PATH}. Please run training first.")
-        return None
-    model.eval()
-    return model
-
-model = load_model()
-
-# Load Similarity Search (Lazy Loading preserved)
+    if 'model' in st.session_state:
+        return st.session_state['model']
+    
+    with st.spinner("Loading AI Brain..."):
+        model = GastroClassifier(num_classes=len(CLASSES))
+        try:
+            model.load_state_dict(torch.load(MODEL_PATH, map_location=torch.device('cpu')))
+            model.eval()
+            st.session_state['model'] = model
+            return model
+        except Exception as e:
+            st.error(f"Error loading model: {e}")
+            return None
 @st.cache_resource
 def load_similarity_engine():
     if not os.path.exists(DATA_DIR): return None
@@ -119,6 +124,7 @@ st.markdown("#### Upload an endoscopy image for real-time classification and exp
 # Main Interface
 uploaded_file = st.file_uploader("Drop your scan here", type=["jpg", "jpeg", "png"], help="Supported formats: JPG, PNG")
 
+model = load_model()
 if uploaded_file is not None and model:
     image = Image.open(uploaded_file).convert('RGB')
     
@@ -140,7 +146,7 @@ if uploaded_file is not None and model:
     col_img, col_metrics = st.columns([1, 2])
     
     with col_img:
-        st.image(image, caption='Query Image', width="stretch")
+        st.image(image, caption='Query Image', use_container_width=True)
     
     with col_metrics:
         # Exact formatting from screenshot: Diagnosis: [Class] (Blue)
@@ -186,7 +192,7 @@ if uploaded_file is not None and model:
                     cam, _ = grad_cam(input_tensor, pred_idx)
                     overlay = overlay_cam(input_tensor[0], cam)
                     
-                    st.image(overlay, caption=f"Grad-CAM Attention Map", width="stretch")
+                    st.image(overlay, caption=f"Grad-CAM Attention Map", use_container_width=True)
                 except Exception as e:
                     st.error(f"Grad-CAM failed: {e}")
             with col_cam2:
@@ -213,7 +219,7 @@ if uploaded_file is not None and model:
                     dist = distances[0][i]
                     
                     with cols[i]:
-                        st.image(path, width="stretch")
+                        st.image(path, use_container_width=True)
                         st.caption(f"**{class_name}**\nS: {1/(1+dist):.2f}")
             except Exception as e:
                 st.error(f"Search failed: {e}")
@@ -243,7 +249,7 @@ if uploaded_file is not None and model:
                         disp_img = perturbed_img[0].cpu() * std + mean
                         disp_img = torch.clamp(disp_img, 0, 1)
                         disp_img = transforms.ToPILImage()(disp_img)
-                        st.image(disp_img, caption=f"Counterfactual Example ({target_class})", width=300)
+                        st.image(disp_img, caption=f"Counterfactual Example ({target_class})", use_container_width=True)
                     else:
                         st.warning("Could not generate a counterfactual within the step limit.")
                  except Exception as e:
