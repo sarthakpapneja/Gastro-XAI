@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# Data and Models (Large Files)
+data/
+models/*.pth
+reports/*.png
+reports/*.html
+
+# OS
+.DS_Store
