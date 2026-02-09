@@ -37,8 +37,6 @@ A polished **Streamlit-based dashboard** optimized for clinical use, featuring:
 |---|---|
 | ![Dashboard Screenshot](assets/dashboard.png) | ![Insights Screenshot](assets/insights.png) |
 
-*Note: The images above are high-fidelity mockups. You can replace them with actual screenshots of your running app.*
-
 ---
 
 ## 🔬 Clinical Methodology
