@@ -31,6 +31,24 @@ A polished **Streamlit-based dashboard** optimized for clinical use, featuring:
 - Interactive Plotly visualizations for probability distributions.
 - Performance metrics (Inference time, Reliability score).
 
+## 📸 Visual Showcase
+
+| Diagnostic Dashboard | Explainable Insights |
+|---|---|
+| ![Dashboard Screenshot](https://via.placeholder.com/800x450?text=Diagnostic+Dashboard+Screenshot) | ![Insights Screenshot](https://via.placeholder.com/800x450?text=XAI+Insights+Screenshot) |
+
+*Note: You can replace these placeholders with your actual screenshots by adding them to the repository.*
+
+---
+
+## 🔬 Clinical Methodology
+
+The system's "Visual Attention" (Grad-CAM) helps clinicians ensure the AI isn't hallucinating by confirming it identifies pathological features like:
+- **Erythematous mucosal changes** in Ulcerative Colitis.
+- **Protruded epithelial structures** in Polyps.
+- **Vascular pattern disruptions** in Esophagitis.
+
+
 ---
 
 ## 🛠️ System Architecture
