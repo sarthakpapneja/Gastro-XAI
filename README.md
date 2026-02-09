@@ -35,9 +35,9 @@ A polished **Streamlit-based dashboard** optimized for clinical use, featuring:
 
 | Diagnostic Dashboard | Explainable Insights |
 |---|---|
-| ![Dashboard Screenshot](https://via.placeholder.com/800x450?text=Diagnostic+Dashboard+Screenshot) | ![Insights Screenshot](https://via.placeholder.com/800x450?text=XAI+Insights+Screenshot) |
+| ![Dashboard Screenshot](assets/dashboard.png) | ![Insights Screenshot](assets/insights.png) |
 
-*Note: You can replace these placeholders with your actual screenshots by adding them to the repository.*
+*Note: The images above are high-fidelity mockups. You can replace them with actual screenshots of your running app.*
 
 ---
 
