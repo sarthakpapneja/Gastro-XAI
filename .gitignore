@@ -5,9 +5,8 @@ __pycache__/
 venv/
 .env
 
-# Data and Models (Large Files)
+# Data (Large Files)
 data/
-models/*.pth
 reports/*.png
 reports/*.html
 
